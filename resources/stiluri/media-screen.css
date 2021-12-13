@@ -1,0 +1,45 @@
+
+  @media screen and (max-width: 1000px){
+    html{
+      font-size: 13px;
+    }
+
+    #grid{
+      grid-template-columns: 1fr 1fr ;
+      grid-template-areas:"home home "
+                          "users stat"
+                          "site stat"
+                          "cal topTable"
+                          "news topTable"
+                          "whyV whyV";
+    }
+
+    #acasa-meniu{
+      display:none;
+    }
+}
+  @media screen and (max-width: 550px){
+    html{
+      font-size: 10px;
+    }
+
+    #grid{
+      grid-template-columns: 1fr;
+      grid-template-areas:"home"
+                          "users"
+                          "stat"
+                          "site"
+                          "cal"
+                          "topTable"
+                          "news"
+                          "whyV";
+    }
+
+    .iframe-tab{
+      transition: none;
+    }
+
+    #acasa-meniu{
+      display:none;
+    }
+}
