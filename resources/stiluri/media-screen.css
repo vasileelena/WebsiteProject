@@ -17,6 +17,10 @@
     #acasa-meniu{
       display:none;
     }
+
+    #grid-galerie {
+      display:block;
+    }
 }
   @media screen and (max-width: 550px){
     html{
@@ -41,5 +45,9 @@
 
     #acasa-meniu{
       display:none;
+    }
+
+    #grid-galerie {
+      display:block;
     }
 }

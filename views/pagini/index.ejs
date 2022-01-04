@@ -73,6 +73,23 @@
         <br />
   </section>
 
+  <section id="galerie">
+    <h2>Galerie produse</h2>
+    <div id="grid-galerie">
+      <% for (let imag of locals.imagini){
+        %>
+      <figure>
+        <picture>
+          <source srcset="/<%-imag.mic%>" media="(max-width:550px)" />
+          <source srcset="/<%-imag.mediu%>" media="(max-width:1000px)" />
+          <img src="/<%-imag.mare%>" alt="text" />
+        </picture>
+        <figcaption> <%- imag.descriere%> </figcaption>
+      </figure>
+      <% } %>
+    </div>
+  </section>
+
   <!-- punctul  7 section in section + article-->
   <section id="whyVegan">
     <div id="titleV"><h2>De ce vegan?</h2></div>
@@ -186,6 +203,7 @@
 
   <div id="statistics">
     <h2>Statistici site</h2>
+    <%- "Ip conectat: " + locals.ip %> <br />
     Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
   </div>
 

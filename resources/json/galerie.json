@@ -1,0 +1,41 @@
+{
+  "cale_galerie":"resources/imagini/galerie",
+  "imagini": [
+    {
+      "fisier": "green-course-chiftelute-vegetale-in-sos-curry.png",
+      "descriere": "Chiftelute vegetale cu curry"
+    },
+    {
+      "fisier": "lord-of-tofu-natural-tofu.png",
+      "descriere": "Tofu natural"
+    },
+    {
+      "fisier": "Natumi-crema-vegetala-gatit-cocos.png",
+      "descriere": "Crema de gatit din cocos"
+    },
+    {
+      "fisier": "naturli-burger-vegan.png",
+      "descriere": "Burger vegan"
+    },
+    {
+      "fisier": "naturli-falafel-vegan.png",
+      "descriere": "Falafel"
+    },
+    {
+      "fisier": "Naturli-soia-fara-zahar.png",
+      "descriere": "Lapte de soia neindulcit"
+    },
+    {
+      "fisier": "unfished-alternativ-vegetal-la-ton.png",
+      "descriere": "Alternativa la ton"
+    },
+    {
+      "fisier": "Verdino-carnati-mic-dejun.png",
+      "descriere": "Carnati vegani"
+    },
+    {
+      "fisier": "Violife_Vioblock_250g.png",
+      "descriere": "Unt vegan"
+    }
+  ]
+}

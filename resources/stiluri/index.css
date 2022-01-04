@@ -8,6 +8,7 @@
     --textColor: #656B5C;
     --highlightColor: #C2EB84;
     --borderColor: #586B3C;
+    --padding-intern:4%;
     background-color: var(--backgroundColor);
   }
 
@@ -25,6 +26,7 @@
                         "users stat stat site"
                         "cal cal topTable topTable"
                         "news news topTable topTable"
+                        "galerie galerie galerie galerie"
                         "whyV whyV whyV whyV";
   }
 
@@ -44,6 +46,27 @@
 
   #topRankedTable{
     grid-area: topTable;
+  }
+
+  #galerie{
+    grid-area: galerie;
+    padding-left:var(--padding-intern);
+    padding-right:var(--padding-intern);
+  }
+
+  #grid-galerie {
+   display:grid;
+   grid-template-columns: repeat(3,1fr);
+   grid-row-gap:0.5em;
+   grid-column-gap:0.5em;
+  }
+
+  #grid-galerie img{
+    width: 100%;
+  }
+
+  #grid-galerie figcaption{
+    text-align:center;
   }
 
   #whyVegan{
