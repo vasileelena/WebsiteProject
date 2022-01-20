@@ -2,40 +2,136 @@
   "cale_galerie":"resources/imagini/galerie",
   "imagini": [
     {
-      "fisier": "green-course-chiftelute-vegetale-in-sos-curry.png",
-      "descriere": "Chiftelute vegetale cu curry"
+      "cale_imagine": "green-course-chiftelute-vegetale-in-sos-curry.png",
+      "titlu": "Chiftelute vegetale cu curry",
+      "descriere": "Chiftelute vegetale in sos curry, gata de consum.",
+      "sfert_ora": "1"
     },
     {
-      "fisier": "lord-of-tofu-natural-tofu.png",
-      "descriere": "Tofu natural"
+      "cale_imagine": "lord-of-tofu-natural-tofu.png",
+      "titlu": "Tofu natural",
+      "descriere": "Tofu simplu",
+      "sfert_ora": "2"
     },
     {
-      "fisier": "Natumi-crema-vegetala-gatit-cocos.png",
-      "descriere": "Crema de gatit din cocos"
+      "cale_imagine": "Natumi-crema-vegetala-gatit-cocos.png",
+      "titlu": "Crema de gatit din cocos",
+      "descriere": "Crema vegetala pentru gatit pe baza de lapte de cocos.",
+      "sfert_ora": "3"
     },
     {
-      "fisier": "naturli-burger-vegan.png",
-      "descriere": "Burger vegan"
+      "cale_imagine": "naturli-burger-vegan.png",
+      "titlu": "Burger vegan",
+      "descriere": "Burger vegani pe baza de soia, congelati.",
+      "sfert_ora": "4"
     },
     {
-      "fisier": "naturli-falafel-vegan.png",
-      "descriere": "Falafel"
+      "cale_imagine": "naturli-falafel-vegan.png",
+      "titlu": "Falafel",
+      "descriere": "Falafel semipreparat, congelat.",
+      "sfert_ora": "1"
     },
     {
-      "fisier": "Naturli-soia-fara-zahar.png",
-      "descriere": "Lapte de soia neindulcit"
+      "cale_imagine": "Naturli-soia-fara-zahar.png",
+      "titlu": "Lapte de soia neindulcit",
+      "descriere": "Lapte obtinut din boabe de soia, neindulcid.",
+      "sfert_ora": "2"
     },
     {
-      "fisier": "unfished-alternativ-vegetal-la-ton.png",
-      "descriere": "Alternativa la ton"
+      "cale_imagine": "unfished-alternativ-vegetal-la-ton.png",
+      "titlu": "Alternativa la ton",
+      "descriere": "Alternativa la ton obtinut din texturat de soia si uleiuri omega 3.",
+      "sfert_ora": "3"
     },
     {
-      "fisier": "Verdino-carnati-mic-dejun.png",
-      "descriere": "Carnati vegani"
+      "cale_imagine": "Verdino-carnati-mic-dejun.png",
+      "titlu": "Carnati vegani",
+      "descriere": "Carnati vegani pentru mic dejun obtinuti din proteina de mazare.",
+      "sfert_ora": "4"
     },
     {
-      "fisier": "Violife_Vioblock_250g.png",
-      "descriere": "Unt vegan"
+      "cale_imagine": "Violife_Vioblock_250g.png",
+      "titlu": "Unt vegan",
+      "descriere": "Unt vegan nesarat, fara ulei de palmier.",
+      "sfert_ora": "1"
+    },
+    {
+      "cale_imagine": "Verdino-Pizza-Bacon.png",
+      "titlu": "Pizza cu bacon Verdino",
+      "descriere": "Pizza cu bacon obtinut din proteina de mazare.",
+      "sfert_ora": "2"
+    },
+    {
+      "cale_imagine": "rude-health-almond-drink-milk-1l.png",
+      "titlu": "Lapte de migdale",
+      "descriere": "Lapte de migdale in ambalaj de carton 1L.",
+      "sfert_ora": "3"
+    },
+    {
+      "cale_imagine": "harvest-moon-preparat-bio-fermentat-din-bautura-caju-cu-vanilie-300g.png",
+      "titlu": "Iaurt de caju bio cu aroma de vanilie",
+      "descriere": "Iaurt fermentat pe baza de caju cu gust de vanilie.",
+      "sfert_ora": "1"
+    },
+    {
+      "cale_imagine": "Aivia_CrenvurstiAfumati.png",
+      "titlu": "Alternativa la crenvrusti afumati",
+      "descriere": "Crenvrusti afumati din soia.",
+      "sfert_ora": "4"
+    },
+    {
+      "cale_imagine": "branza-vegana-rasa-mozzarella-violife.png",
+      "titlu": "Mozarella vegana rasa Violife",
+      "descriere": "Mozarella vegana rasa fara ulei de palmier, Violife.",
+      "sfert_ora": "2"
+    },
+    {
+      "cale_imagine": "Aivia_PateuCeapa.png",
+      "titlu": "Pateu vegetal cu ceapa",
+      "descriere": "Pateu vegetal din izolat proteic de soia cu aroma de ceapa.",
+      "sfert_ora": "3"
+    },
+    {
+      "cale_imagine": "verdino-branza-emmentaler.png",
+      "titlu": "Branza emmentaler feliata",
+      "descriere": "Felii de branza cu gust de emmentaler feliata de la Verdino.",
+      "sfert_ora": "1"
+    },
+    {
+      "cale_imagine": "biona-unt-de-migdale-smooth.png",
+      "titlu": "Unt de migdale cremos bio",
+      "descriere": "Unt de migdale cremos bio Biona.",
+      "sfert_ora": "1"
+    },
+    {
+      "cale_imagine": "sos-remoulade-vantastic-foods.png",
+      "titlu": "Maioneza remoulade vegana",
+      "descriere": "Sos remoulade vegan bio.",
+      "sfert_ora": "2"
+    },
+    {
+      "cale_imagine": "filgud-specialitate-bio-din-caju.png",
+      "titlu": "Iaurt Filgud din caju",
+      "descriere": "Iaurt din caju, fermentat.",
+      "sfert_ora": "3"
+    },
+    {
+      "cale_imagine": "filgud-boabe-de-amarant-cu-ceapa-rosie.png",
+      "titlu": "Icre din amarant si ceapa rosie Filgud",
+      "descriere": "alternativa la icre din amarant si ceapa rosie Filgud.",
+      "sfert_ora": "1"
+    },
+    {
+      "cale_imagine": "lherbivore-seitan-marinat-mix-piper.png",
+      "titlu": "Seitan marinat in mix de piper",
+      "descriere": "Seitan marinat in mix de piper l'herbivore.",
+      "sfert_ora": "4"
+    },
+    {
+      "cale_imagine": "green-course-sos-bolognese-vegetal.png",
+      "titlu": "Sos bolognese vegetal",
+      "descriere": "Sos bolognese vegetal Green Course.",
+      "sfert_ora": "2"
     }
   ]
 }

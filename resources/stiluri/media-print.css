@@ -1,0 +1,46 @@
+@media print {
+  .noprint {
+    visibility: hidden;
+  }
+
+  .big-heading {
+    text-align: center;
+  }
+
+  .watermark {
+    visibility: visible;
+    width: 4cm;
+    height: 1cm;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    border: 1px solid black;
+    text-align: center;
+    font-weight: bold;
+    opacity: 0.4;
+    border-radius: 10px;
+  }
+
+  #link-top {
+    visibility: hidden;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  nav {
+    position: static;
+  }
+
+  @page :left {
+    margin-left: 3cm;
+    margin-right: 1cm;
+  }
+
+  @page :right {
+    margin-left: 1cm;
+    margin-right: 3cm;
+  }
+}

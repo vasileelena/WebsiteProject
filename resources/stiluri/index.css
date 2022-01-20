@@ -1,315 +1,329 @@
+body {
+  --dim-padding: 1.5em;
+  --menuHeight: 2rem;
+  --mainColor: #97B867;
+  --backgroundColor: #E1EECD;
+  --textColor: #656B5C;
+  --highlightColor: #C2EB84;
+  --borderColor: #586B3C;
+  --padding-intern: 4%;
+  background-color: var(--backgroundColor);
+}
 
+main {
+  padding-left: var(--dim-padding);
+  padding-right: var(--dim-padding);
+}
 
-  body{
-    --dim-padding: 1.5em;
-    --menuHeight: 2rem;
-    --mainColor: #97B867;
-    --backgroundColor: #E1EECD;
-    --textColor: #656B5C;
-    --highlightColor: #C2EB84;
-    --borderColor: #586B3C;
-    --padding-intern:4%;
-    background-color: var(--backgroundColor);
+/* Headers */
+
+h1 {
+  padding-left: 25px;
+  padding-top: 50px;
+  color: var(--textColor);
+}
+
+h2 {
+  color: var(--highlightColor);
+}
+
+h3 {
+  color: var(--textColor);
+}
+
+/* HTML elements */
+
+table, th, td {
+  border: 1px solid var(--borderColor);
+}
+
+a {
+  color: var(--textColor);
+}
+/* Grid areas */
+
+#grid {
+  display: grid;
+  background-color: var(--mainColor);
+  grid-template-columns: 1fr 1fr 3fr;
+  grid-template-areas: "home home home home"
+    "users stat stat site"
+    "cal cal topTable topTable"
+    "news news topTable topTable"
+    "galerie galerie galerie galerie"
+    "whyV whyV whyV whyV";
+}
+
+#grid>* {
+  /* = toti fii din containerul cu id ul grid, adica celulele*/
+  border: 3px solid var(--backgroundColor);
+  padding-left: var(--dim-padding);
+  padding-right: var(--dim-padding);
+}
+
+#about {
+  grid-area: home;
+}
+
+#news {
+  grid-area: news;
+}
+
+#topRankedTable {
+  grid-area: topTable;
+}
+
+#whyVegan {
+  grid-area: whyV;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas: "title title"
+    "def env"
+    "health env";
+}
+
+#whyVegan>* {
+  /* border: 1px solid grey; */
+  padding-left: var(--dim-padding);
+  padding-right: var(--dim-padding);
+}
+
+#calendar {
+  grid-area: cal;
+}
+
+#onlineUsers {
+  grid-area: users;
+}
+
+#statistics {
+  grid-area: stat;
+}
+
+#siteDetails {
+  grid-area: site;
+}
+
+#titleV {
+  grid-area: title;
+}
+
+#animalsAndEnv {
+  grid-area: env;
+}
+
+#health {
+  grid-area: health;
+}
+
+#definition {
+  grid-area: def;
+}
+
+/* Meniu */
+
+nav {
+  /* height: var(--menuHeight); */
+  width: 100%;
+  background-color: var(--textColor);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+nav ul, nav li, nav a, nav {
+  padding: 0;
+  margin: 0;
+}
+
+.menu ul {
+  margin-top: 3.5px;
+  margin-left: -0.5px;
+}
+
+ul.menu li {
+  border: 1px solid black;
+  border-top: hidden;
+  box-sizing: border-box;
+  width: 150px;
+  text-align: center;
+  list-style-type: none;
+  float: left;
+}
+
+ul.menu div:hover, ul.menu>a:hover {
+  box-shadow: inset 0 0 5px var(--highlightColor);
+}
+
+/*Submeniu*/
+
+ul.menu ul {
+  display: none;
+}
+
+ul.menu li:hover ul {
+  display: block;
+  background-color: var(--mainColor);
+  animation-name: submeniu;
+  animation-iteration-count: 1;
+  animation-duration: 400ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+/* Sageti submeniu */
+
+ul.menu li>ul>li>a>span {
+  visibility: hidden;
+  position: absolute;
+  left: 0px;
+  animation-name: vine-stanga;
+  animation-iteration-count: 1;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+ul.menu li>ul>li>a:hover>span {
+  visibility: visible;
+  transform: translateX(-100%);
+}
+
+/* Animatie sageti submeniu */
+
+@keyframes vine-stanga {
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Animatie  submeniu */
+
+@keyframes submeniu {
+  0% {
+    opacity: 0;
+    transform: scale(0, 0);
   }
 
-
-  main{
-    padding-left: var(--dim-padding);
-    padding-right: var(--dim-padding);
+  50% {
+    transform: scale(0.5, 0.5);
   }
 
-  #grid{
-    display: grid;
-    background-color: var(--mainColor);
-    grid-template-columns: 1fr 1fr 3fr;
-    grid-template-areas:"home home home home"
-                        "users stat stat site"
-                        "cal cal topTable topTable"
-                        "news news topTable topTable"
-                        "galerie galerie galerie galerie"
-                        "whyV whyV whyV whyV";
+  100% {
+    transform: scale(1, 1);
   }
+}
 
-  #grid>*{ /* = toti fii din containerul cu id ul grid, adica celulele*/
-    border: 3px solid var(--backgroundColor);
-    padding-left: var(--dim-padding);
-    padding-right: var(--dim-padding);
-  }
+ul.menu li a {
+  display: block;
+  background-color: var(--textColor);
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
 
-  #about{
-    grid-area: home;
-  }
+ul.menu li a, ul.menu li div {
+  text-decoration: none;
+  padding: 5px;
+  color: var(--highlightColor);
+  font-weight: bold;
+  transition: 500ms box-shadow;
+}
 
-  #news{
-    grid-area: news;
-  }
-
-  #topRankedTable{
-    grid-area: topTable;
-  }
-
-  #galerie{
-    grid-area: galerie;
-    padding-left:var(--padding-intern);
-    padding-right:var(--padding-intern);
-  }
-
-  #grid-galerie {
-   display:grid;
-   grid-template-columns: repeat(3,1fr);
-   grid-row-gap:0.5em;
-   grid-column-gap:0.5em;
-  }
-
-  #grid-galerie img{
-    width: 100%;
-  }
-
-  #grid-galerie figcaption{
-    text-align:center;
-  }
-
-  #whyVegan{
-    grid-area: whyV;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-areas: "title title"
-                         "def env"
-                         "health env";
-  }
-
-  #whyVegan>*{
-    /* border: 1px solid grey; */
-    padding-left: var(--dim-padding);
-    padding-right: var(--dim-padding);
-  }
-
-  #calendar{
-    grid-area: cal;
-  }
-
-  #onlineUsers{
-    grid-area: users;
-  }
-
-  #statistics{
-    grid-area: stat;
-  }
-
-  #siteDetails{
-    grid-area: site;
-  }
-
-  #titleV{
-    grid-area: title;
-  }
-
-  #animalsAndEnv{
-    grid-area: env;
-  }
-
-  #health{
-    grid-area: health;
-  }
-
-  #definition{
-    grid-area: def;
-  }
-
-  nav{
-    /* height: var(--menuHeight); */
-    width: 100%;
-    background-color: var(--textColor);
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
-
-  nav ul, nav li, nav a, nav{
-    padding: 0;
-    margin: 0;
-  }
-
-  .menu ul{
-    margin-top: 3.5px;
-    margin-left: -0.5px;
-  }
-
-  ul.menu li{
-    border: 1px solid black;
-    border-top: hidden;
-    box-sizing: border-box;
-    width: 150px;
-    text-align: center;
-    list-style-type: none;
-    float: left;
-  }
-
-  ul.menu div:hover, ul.menu>a:hover{
-    box-shadow: inset 0 0 5px var(--highlightColor);
-  }
-
-  /*submeniu*/
-  ul.menu ul{
-    display: none;
-  }
-
-  ul.menu li:hover ul{
-    display: block;
-    background-color: var(--mainColor);
-    animation-name: submeniu;
-    animation-iteration-count: 1;
-    animation-duration: 400ms;
-    animation-fill-mode: forwards;
-    animation-timing-function: linear;
-  }
-
-  /* sageti submeniu */
-  ul.menu li>ul>li>a>span{
-    visibility: hidden;
-    position: absolute;
-    left: 0px;
-    animation-name: vine-stanga;
-    animation-iteration-count: 1;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-    animation-timing-function: linear;
-  }
-
-  ul.menu li>ul>li> a:hover >span{
-    visibility: visible;
-    transform: translateX(-100%);
-  }
-
-  @keyframes vine-stanga {
-    to{
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes submeniu {
-    0%{
-      opacity: 0;
-      transform: scale(0, 0);
-    }
-    50%{
-      transform: scale(0.5, 0.5);
-    }
-    100%{
-      transform: scale(1, 1);
-    }
-  }
-
-  ul.menu li a{
-    display: block;
-    background-color: var(--textColor);
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-  }
-
-  ul.menu li a, ul.menu li div{
-    text-decoration: none;
-    padding: 5px;
-    color: var(--highlightColor);
-    font-weight: bold;
-    transition: 500ms box-shadow;
-  }
-  .menu > li{
-    height: 32px;
-    border-left: hidden !important;
-  }
-
-  h1{
-    padding-left: 25px;
-    padding-top: 50px;
-    color: var(--textColor);
-  }
-
-  h2{
-    color: var(--highlightColor);
-  }
-
-  h3{
-    color: var(--textColor);
-  }
-
-  table, th, td{
-    border: 1px solid var(--borderColor);
-  }
-
-  .iframe-tab{
-    border: 1px solid var(--borderColor);
-    padding: 3px;
-    box-shadow: rgba(71, 87, 49, 0.4) 1px -3px 2px 0px;
-    transition: 1s background-color;
-    text-decoration: none;
-    color: var(--highlightColor);
-  }
-
-  .iframe-tab:hover{
-    background-color: rgba(71, 87, 49, 0.4);
-  }
-
-  #link-top {
-      position: fixed;
-      bottom: 0.3em;
-      opacity: 0.5;
-      left: 0.3em;
-      width: 3rem;
-      box-sizing: border-box;
-      height: 2rem;
-      line-height: 2rem;
-      text-align: center;
-      border-left: 3px solid var(--borderColor);
-      border-right: 3px solid var(--borderColor);
-      border-radius: 50%;
-      background: var(--backgroundColor);
-      transition: opacity 500ms linear;
-  }
-
-  #link-top:hover {
-    opacity: 0.9;
-
-  }
-
-  .tooltip-text {
-    visibility: hidden;
-    width: 160px;
-    left: 3em;
-    background-color: var(--backgroundColor);
-    color: var(--textColor);
-    text-align: center;
-    border-radius: 1px;
-    padding: 1px;
-    position: absolute;
-    z-index: 1;
-  }
-
-  #link-top:hover #triunghi{
-    border-bottom: 0.7rem solid var(--mainColor);
-    transform: translateY(-50%);
-  }
-
-  #link-top:hover .tooltip-text{
-    visibility: visible;
-    transition-delay: 1s;
-  }
-
-  #triunghi{
-    height: 0px;
-    width: 0;
-    display: inline-block;
-    border-bottom: 0.7rem solid var(--borderColor);
-    border-left: 0.5rem solid transparent;
-    border-right: 0.5rem solid transparent;
-    vertical-align: middle;
-    transform: translateY(-20%);
-    transition: transform 500ms linear;
-  }
+.menu>li {
+  height: 32px;
+  border-left: hidden !important;
+}
 
 
-  footer, footer a{
-    text-decoration: none;
-    color: var(--textColor);
-  }
+
+.zig-zag-hr {
+  border: none;
+  width: 100%;
+  margin: 10px auto;
+  height: 10px;
+  background: linear-gradient(135deg, var(--mainColor) 20%, transparent 25%) -3px 0,
+    linear-gradient(225deg, var(--mainColor) 25%, transparent 20%) -3px 0,
+    linear-gradient(315deg, var(--mainColor) 25%, transparent 20%),
+    linear-gradient(45deg, var(--mainColor) 25%, transparent 20%);
+  background-size: 10px 10px;
+  background-color: var(--textColor);
+}
+
+.iframe-tab {
+  border: 1px solid var(--borderColor);
+  padding: 3px;
+  box-shadow: rgba(71, 87, 49, 0.4) 1px -3px 2px 0px;
+  transition: 1s background-color;
+  text-decoration: none;
+  color: var(--highlightColor);
+}
+
+.iframe-tab:hover {
+  background-color: rgba(71, 87, 49, 0.4);
+}
+
+#link-top {
+  position: fixed;
+  bottom: 0.3em;
+  opacity: 0.5;
+  left: 0.3em;
+  width: 3rem;
+  box-sizing: border-box;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  border-left: 3px solid var(--borderColor);
+  border-right: 3px solid var(--borderColor);
+  border-radius: 50%;
+  background: var(--backgroundColor);
+  transition: opacity 500ms linear;
+}
+
+#link-top:hover {
+  opacity: 0.9;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: 160px;
+  left: 3em;
+  background-color: var(--backgroundColor);
+  color: var(--textColor);
+  text-align: center;
+  border-radius: 1px;
+  padding: 1px;
+  position: absolute;
+  z-index: 1;
+}
+
+#link-top:hover #triunghi {
+  border-bottom: 0.7rem solid var(--mainColor);
+  transform: translateY(-50%);
+}
+
+#link-top:hover .tooltip-text {
+  visibility: visible;
+  transition-delay: 1s;
+}
+
+#triunghi {
+  height: 0px;
+  width: 0;
+  display: inline-block;
+  border-bottom: 0.7rem solid var(--borderColor);
+  border-left: 0.5rem solid transparent;
+  border-right: 0.5rem solid transparent;
+  vertical-align: middle;
+  transform: translateY(-20%);
+  transition: transform 500ms linear;
+}
+
+footer, footer a {
+  text-decoration: none;
+  color: var(--textColor);
+}
+
+.watermark {
+  visibility: hidden;
+}

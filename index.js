@@ -15,7 +15,7 @@ function createImages() {
   let dim_mediu = 250;
 
   for (let imag of obImagini.imagini){
-    [nume_imag, extensie] = imag.fisier.split(".");
+    [nume_imag, extensie] = imag.cale_imagine.split(".");
     console.log(nume_imag, extensie);
     //cream o proprietate noua pt fiecare ob imagine din vector
     imag.mic = `${obImagini.cale_galerie}/mic/${nume_imag}-${dim_mic}.webp`;
@@ -37,9 +37,38 @@ app.get(["/", "/index"], function(req, res){
   console.log(req.url);
   console.log(req.ip);
 
+  imagArray = obImagini.imagini;
   // -------galerie
+  var date = new Date();
+  var minute = date.getMinutes();
+  var sfert = 0;
 
-  res.render("pagini/index.ejs", {ip:req.ip, imagini:obImagini.imagini, cale:obImagini.cale_galerie}); //calea e relativa la folderul views
+  if(minute <= 15){
+    sfert = 1;
+  }
+  else if (minute <= 30) {
+    sfert = 2;
+  }
+  else if (minute <= 45) {
+    sfert = 3;
+  }
+  else {
+    sfert = 4;
+  }
+
+  imagArrayFiltered = imagArray.filter(function (imag){
+    return imag.sfert_ora == sfert;
+  } );
+
+  console.log(imagArrayFiltered)
+
+  res.render("pagini/index.ejs", {ip:req.ip, imagini:imagArrayFiltered, cale:obImagini.cale_galerie}); //calea e relativa la folderul views
+});
+
+app.get(["/galerie_produse"], function(req, res){
+  console.log(req.url);
+
+  res.render("pagini/galerie_produse.ejs", {imagini:imagArrayFiltered, cale:obImagini.cale_galerie}); //calea e relativa la folderul views
 });
 
 app.get("/ceva", function(req, res){

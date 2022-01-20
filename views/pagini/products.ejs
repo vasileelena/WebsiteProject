@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta name="keywords" content="produse, vegan, suplimente, ingrediente, mediu, ingrijire personala">
+  <meta name="description" content="Produse vegane, sanatoase si gustoase. Ghiduri pentru dieta vegana. Produse de ingrijire personala">
+  <title>Road to Vegan - Home</title>
+  <link rel="stylesheet" type="text/css" href="/resources/stiluri/galerie_statica.css"/>
+  <%- include("../fragmente/head.ejs") %>
+</head>
+
+<body>
+<a id="top"></a>
+<%- include("../fragmente/header.ejs") %>
+
+<main>
+  <section id="galerie">
+    <h2>Galerie produse</h2>
+    <div id="grid-galerie">
+      <% for (let imag of locals.imagini){
+        %>
+      <figure title="<%- imag.descriere%>">
+        <picture>
+          <source srcset="/<%-imag.mic%>" media="(max-width:550px)" />
+          <source srcset="/<%-imag.mediu%>" media="(max-width:1000px)" />
+          <img src="/<%-imag.mare%>" alt="<%-imag.cale_imagine%>" />
+        </picture>
+        <figcaption> <%- imag.titlu%> </figcaption>
+      </figure>
+      <% } %>
+    </div>
+  </section>
+</main>
+
+<%- include("../fragmente/footer.ejs") %>
+
+</body>
+</html>
