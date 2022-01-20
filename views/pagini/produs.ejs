@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+  <meta name="keywords" content="produse, vegan, suplimente, ingrediente, mediu, ingrijire personala">
+  <meta name="description" content="Produse vegane, sanatoase si gustoase. Ghiduri pentru dieta vegana. Produse de ingrijire personala">
+  <title>Road to Vegan - Home</title>
+  <link rel="stylesheet" type="text/css" href="/resources/stiluri/galerie_statica.css" />
+  <%- include("../fragmente/head.ejs") %>
+</head>
+
+<body>
+  <a id="top"></a>
+  <%- include("../fragmente/header.ejs") %>
+
+  <main>
+    <section>
+      <h2>Pagină produs</h2>
+      <article id="art-produs">
+        <h3><span class="nume"><%- locals.prod.nume %></span></h3>
+        <p>Pret: <span class="pret"><%- locals.prod.pret %> </span></p>
+        <p>Descriere: <span class="descriere"><%- locals.prod.descriere %> </span></p>
+        <p>Ingrediente: <span class="ingrediente"><%- locals.prod.ingrediente %> </span></p>
+        <p>Cantitate: <span class="cantitate"><%- locals.prod.cantitate %> </span></p>
+        <p>Unitate masura: <span class="unit-masura"><%- locals.prod.unit_masura %> </span></p>
+        <p>Categorie: <span class="categorie"><%- locals.prod.categorie %> </span></p>
+        <p>Reducere: <span class="reducere"><%- locals.prod.reducere %> </span></p>
+        <p>Data adăugare: <span class="data_adaugare"><%- locals.prod.data_adaugare %> </span></p>
+        <figure class="imag-produs">
+          <img src="/resources/imagini/galerie/<%- locals.prod.cale_imagine %>" alt="[imagine <%- locals.prod.nume %>]" />
+        </figure>
+      </article>
+
+    </section>
+  </main>
+
+  <%- include("../fragmente/footer.ejs") %>
+
+</body>
+
+</html>

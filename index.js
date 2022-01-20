@@ -1,10 +1,15 @@
 const express = require('express');
 const fs = require('fs');
 const sharp = require('sharp');
+const {Client} = require('pg');
 
 app = express();
 
 app.set("view engine", "ejs");
+
+var client = new Client({user:'elena', password:'elena', host:'localhost', port:5432, database:'proiect'});
+client.connect();
+
 app.use("/resources", express.static(__dirname + "/resources"));
 
 function createImages() {
@@ -33,7 +38,7 @@ function createImages() {
 
 createImages();
 
-app.get(["/", "/index"], function(req, res){
+app.get(["/index", "/"], function(req, res){
   console.log(req.url);
   console.log(req.ip);
 
@@ -63,6 +68,30 @@ app.get(["/", "/index"], function(req, res){
   console.log(imagArrayFiltered)
 
   res.render("pagini/index.ejs", {ip:req.ip, imagini:imagArrayFiltered, cale:obImagini.cale_galerie}); //calea e relativa la folderul views
+});
+
+app.get(["/produse"], function(req, res){
+  console.log(req.query);
+
+  var conditie = "where 1=1";
+  if (req.query.tip) {
+    conditie += ` and tip_produs ='${req.query.tip}'`;
+  }
+  client.query(`select * from produse ${conditie}`, function(err, rez){
+    res.render("pagini/produse.ejs", {produse:rez.rows});
+  });
+
+
+});
+
+app.get(["/produs/:id"], function(req, res){
+  console.log(req.params);
+
+  client.query(`select * from produse where id=${req.params.id}`, function(err, rez){
+    res.render("pagini/produs.ejs", {prod:rez.rows[0]});
+  });
+
+
 });
 
 app.get(["/galerie_produse"], function(req, res){
