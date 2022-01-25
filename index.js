@@ -36,6 +36,13 @@ function createImages() {
   }
 }
 
+var categorii;
+
+client.query("select distinct tip_produs from produse", function(err, rez){
+  console.log(rez.rows);
+  categorii = rez.rows;
+});
+
 createImages();
 
 app.get(["/index", "/"], function(req, res){
@@ -67,7 +74,9 @@ app.get(["/index", "/"], function(req, res){
 
   console.log(imagArrayFiltered)
 
-  res.render("pagini/index.ejs", {ip:req.ip, imagini:imagArrayFiltered, cale:obImagini.cale_galerie}); //calea e relativa la folderul views
+  res.render("pagini/index.ejs", {ip:req.ip, imagini:imagArrayFiltered, cale:obImagini.cale_galerie, categorii:categorii});
+
+  //calea e relativa la folderul views
 });
 
 app.get(["/produse"], function(req, res){
@@ -77,8 +86,13 @@ app.get(["/produse"], function(req, res){
   if (req.query.tip) {
     conditie += ` and tip_produs ='${req.query.tip}'`;
   }
+  var categorii_mici;
+  client.query("select distinct categorie from produse", function(err, rez){
+    categorii_mici = rez.rows;
+    console.log(categorii_mici);
+  })
   client.query(`select * from produse ${conditie}`, function(err, rez){
-    res.render("pagini/produse.ejs", {produse:rez.rows});
+    res.render("pagini/produse.ejs", {produse:rez.rows, categorii:categorii, categ_mici: categorii_mici});
   });
 
 
@@ -88,7 +102,7 @@ app.get(["/produs/:id"], function(req, res){
   console.log(req.params);
 
   client.query(`select * from produse where id=${req.params.id}`, function(err, rez){
-    res.render("pagini/produs.ejs", {prod:rez.rows[0]});
+    res.render("pagini/produs.ejs", {prod:rez.rows[0], categorii:categorii});
   });
 
 
@@ -97,7 +111,7 @@ app.get(["/produs/:id"], function(req, res){
 app.get(["/galerie_produse"], function(req, res){
   console.log(req.url);
 
-  res.render("pagini/galerie_produse.ejs", {imagini:imagArrayFiltered, cale:obImagini.cale_galerie}); //calea e relativa la folderul views
+  res.render("pagini/galerie_produse.ejs", {imagini:imagArrayFiltered, cale:obImagini.cale_galerie, categorii:categorii}); //calea e relativa la folderul views
 });
 
 app.get("/ceva", function(req, res){
@@ -108,7 +122,7 @@ app.get("/ceva", function(req, res){
 
 app.get("/*", function(req, res){
   console.log(req.url);
-  res.render("pagini" + req.url, function(err, rezultatRandare){ //calea e relativa la folderul views
+  res.render("pagini" + req.url, {categorii:categorii}, function(err, rezultatRandare){ //calea e relativa la folderul views
     console.log(err);
     if(err) {
       res.render("pagini/404");

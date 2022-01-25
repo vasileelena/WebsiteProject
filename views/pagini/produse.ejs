@@ -5,33 +5,325 @@
   <meta name="keywords" content="produse, vegan, suplimente, ingrediente, mediu, ingrijire personala">
   <meta name="description" content="Produse vegane, sanatoase si gustoase. Ghiduri pentru dieta vegana. Produse de ingrijire personala">
   <title>Road to Vegan - Home</title>
-  <link rel="stylesheet" type="text/css" href="/resources/stiluri/galerie_statica.css" />
+  <link rel="stylesheet" type="text/css" href="/resources/stiluri/produse.css" />
   <%- include("../fragmente/head.ejs") %>
+
 </head>
 
 <body>
   <a id="top"></a>
   <%- include("../fragmente/header.ejs") %>
+  <script>
+    function read_range() {
+      var range = document.getElementById("i_range")
+      range.onchange = function() {
+        var cantitateRange = document.getElementById("cantitate-range")
+        if (!cantitateRange) {
+          cantitateRange = document.createElement("span")
+          cantitateRange.id = "cantitate-range"
+          this.parentNode.appendChild(cantitateRange)
+
+        }
+        cantitateRange.innerHTML = this.value
+        cantitateRange.style.border = "1px solid black"
+      }
+    }
+
+    function sortare(semn) {
+      var articole = document.getElementsByClassName("produs")
+      var vectorArticole = Array.from(articole)
+      vectorArticole.sort(function(a, b) {
+
+        let raport_a = parseInt(a.getElementsByClassName("val-cantitate")[0].innerHTML) / parseInt(a.getElementsByClassName("val-pret")[0].innerHTML)
+        //returneaza span-ul cu valoarea de cantitate si respectiv pret
+        let raport_b = parseInt(b.getElementsByClassName("val-cantitate")[0].innerHTML) / parseInt(b.getElementsByClassName("val-pret")[0].innerHTML)
+        return semn * (raport_a - raport_b)
+
+        let categ_a = a.getElementsByClassName("val-categorie")[0].innerHTML
+        let categ_b = b.getElementsByClassName("val-categorie")[0].innerHTML
+        return semn * (categ_a - categ_b)
+      })
+      for (let art of vectorArticole) {
+        art.parentNode.appendChild(art)
+      }
+    }
+
+    function getRadioValue() {
+      var radioButtons = document.getElementsByName("gr_rad")
+      var reducere
+      for (let rad of radioButtons) {
+        if (rad.checked) {
+          reducere = rad.value;
+          return reducere;
+        }
+      }
+    }
+
+    function getSelected() {
+      var optiuni = document.getElementById("i_sel_simplu").options
+      for (let opt of optiuni) {
+        if (opt.selected)
+          return opt.value;
+      }
+    }
+
+    function getCheckBoxValues() {
+      var checkboxes = document.getElementsByName("gr_chck");
+      var sir = "";
+      for (let ch of checkboxes) {
+        if (ch.checked)
+          sir += ch.value + ","
+      }
+      return sir;
+    }
+
+    function getSelectedOptions() {
+      var optiuni = document.getElementById("i_sel_multiplu").options;
+      var vector = [];
+      for (let opt of optiuni) {
+        if (opt.selected)
+          vector.push(opt.value);
+      }
+
+      return vector
+    }
+
+    window.onload = function() {
+      read_range()
+      var btnSortAsc = document.getElementById("sort-asc")
+      btnSortAsc.onclick = function() {
+        sortare(1)
+      }
+      var btnSortDesc = document.getElementById("sort-desc")
+      btnSortDesc.onclick = function() {
+        sortare(-1)
+      }
+
+
+      btnAplicaFiltre = document.getElementById("filtreaza")
+      btnAplicaFiltre.onclick = function() {
+        var filtruNume = document.getElementById("i_text").value
+
+        var cantitateRange = document.getElementById("cantitate-range")
+
+        var reducere = getRadioValue()
+
+        var optiuniLivrare = getCheckBoxValues()
+
+        var subcategorii = getSelectedOptions()
+
+        var filtruDescriere = document.getElementById("i_textarea").value
+
+        // nu e nevoie sa verific radionbuttons si selectul simplu, ele nu pot fi necompletate
+        if (filtruNume && cantitateRange && filtruDescriere && optiuniLivrare.length != 0 && subcategorii.length != 0){
+          var articole = document.getElementsByClassName("produs")
+          for(let art of articole){
+
+            art.style.display = "none";
+
+            // filtrare nume
+            var nume = art.getElementsByClassName("val-nume")[0]
+            conditie1 = nume.innerHTML.toLowerCase().startsWith(filtruNume)
+
+            // filtrare cantitate
+            var cantitate = art.getElementsByClassName("val-cantitate")[0]
+            conditie2 = parseInt(cantitate.innerHTML) >= parseInt(cantitateRange.innerHTML)
+
+            // filtrare reducere
+            var valReducere = art.getElementsByClassName("val-reducere")[0].innerHTML
+            conditie3 = true;
+            if(reducere != "all")
+              conditie3 = (valReducere == reducere)
+
+            // fitrare stoc
+            var peStoc = art.getElementsByClassName("val-stoc")[0].innerHTML
+            optiuneStoc = getSelected()
+            conditie4 = true
+            if(optiuneStoc == "stoc")
+              conditie4 = (peStoc == "true")
+
+            // filtrare checkbox livrare
+            var livrare = art.getElementsByClassName("val-livrare")[0].innerHTML
+            conditie5 = false
+            for(let livr of optiuniLivrare.split(",")){
+              if(livrare.includes(livr) && livr != "") {
+                conditie5 = true
+                break
+              }
+            }
+
+            //filtrare select multiplu pt subcategorie
+            var subcategorie = art.getElementsByClassName("val-categorie")[0].innerHTML
+            conditie6 = subcategorii.includes(subcategorie)
+
+            // filtrare dupa i_textarea
+            var descriere = art.getElementsByClassName("val-descriere")[0]
+            conditie7 = descriere.innerHTML.toLowerCase().includes(filtruDescriere)
+
+            if (conditie1 && conditie2 && conditie3 && conditie4 && conditie5 && conditie6 && conditie7){
+              art.style.display = "block"
+            }
+          }
+        }
+
+        else
+          alert("Pentru a aplica filtrele este necesara completarea tuturor campurilor!")
+      }
+
+      btnResetFiltre = document.getElementById("resetare")
+      btnResetFiltre.onclick = function() {
+        // input nume
+        document.getElementById("i_text").value = ""
+        // input range
+        document.getElementById("i_range").value = "50"
+        var cantitateRange = document.getElementById("cantitate-range")
+        if(cantitateRange)
+          cantitateRange.remove()
+        // input radionButtons
+        document.getElementById("i_true").checked = false
+        document.getElementById("i_false").checked = false
+        document.getElementById("i_all").checked = true
+        // input select simplu
+        document.getElementById("all").selected = true
+        document.getElementById("stoc").selected = false
+        // input checkboxes
+        for(let chBox of document.getElementsByName("gr_chck")){
+          chBox.checked = false
+        }
+        // input select multiplu
+        for (let opt of document.getElementById("i_sel_multiplu").options) {
+          opt.selected = false
+        }
+        // input textarea
+        document.getElementById("i_textarea").value = ""
+
+      }
+
+    }
+  </script>
 
   <main>
+    <section id="filtre">
+      <h2>Filtre</h2>
+      <label class="input-text"> Nume:
+        <input id="i_text" type="text" value="">
+      </label>
+      <label for="i_range" class="range"> Cantitate: 50
+        <input id="i_range" type="range" min="50" max="1000" step="50" value="50">
+        1000
+      </label>
+      <div> Filtru reducere:
+        <label class="radio-buttons">Cu reducere
+          <input id="i_true" name="gr_rad" value="true" type="radio" />
+        </label>
+        <label class="radio-buttons">Fara reducere
+          <input id="i_false" name="gr_rad" value="false" type="radio" />
+        </label>
+        <label class="radio-buttons">Toate
+          <input id="i_all" checked name="gr_rad" value="all" type="radio" />
+        </label>
+      </div>
+      <label class="select-simplu">Verificare stoc:
+        <select id="i_sel_simplu">
+          <option id="all" value="all" selected>Afiseaza toate</option>
+          <option id="stoc" value="stoc">Afiseaza doar produse din stoc</option>
+        </select>
+      </label>
+      <div>
+        <label class="checkbox">Livrare prin posta
+          <input id="i_posta" name="gr_chck" value="posta" type="checkbox" />
+        </label>
+
+        <label class="checkbox">Livrare prin curier
+          <input id="i_curier" name="gr_chck" value="curier" type="checkbox" />
+        </label>
+
+        <label class="checkbox">Livrare prin easybox
+          <input id="i_easybox" name="gr_chck" value="easybox" type="checkbox" />
+        </label>
+      </div>
+      <label class="select-multiplu">Categorie:
+        <select id="i_sel_multiplu" multiple size="6">
+          <% for( let categ of locals.categ_mici) { %>
+          <option value="<%-categ.categorie%>"><%-categ.categorie%></option>
+          <% } %>
+        </select>
+      </label>
+      <label class="input-textarea">Descriere:
+        <textarea id="i_textarea"></textarea>
+      </label>
+      <div class="butoane-filtre">
+        <button id="filtreaza">Aplica filtre</button>
+        <button id="sort-asc">Ordoneaza crescator dupa raportul cantitate/pret</button>
+        <button id="sort-desc">Ordoneaza descrescator dupa raportul cantitate/pret</button>
+        <button id="medie">Afiseaza media preturilor</button>
+        <button id="resetare">Resetare filtre</button>
+      </div>
+
+
+    </section>
     <section id="produse">
       <h2>Produse</h2>
       <div class="grid-produse">
         <% for( let prod of locals.produse) { %>
-        <article class="produs">
+        <article id="elem_<%-prod.id%>" class="produs">
           <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>"><span class="val-nume"><%- prod.nume%></span></a></h3>
-          <div class="info-prod">
-            <p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span></p>
-            <p class="cantitate">Calorii: <span class="val-cantitate"><%- prod.cantitate%></span></p>
+          <div class="wrapper-prod" style="display:flex;">
+            <div class="info-prod">
+              <table class="table table-striped">
+                <tr class="rand-tabel">
+                  <th scope="row"></th>
+                  <td>Pret</td>
+                  <td><span class="val-pret"><%- prod.pret%></span></td>
+                </tr>
+                <tr class="rand-tabel">
+                  <th scope="row"></th>
+                  <td>Cantitate</td>
+                  <td><span class="val-cantitate"><%- prod.cantitate%></span> <span class="val-unit-mas"><%- prod.unit_masura%></span></td>
+                </tr>
+                <tr class="rand-tabel">
+                  <th scope="row"></th>
+                  <td>Subcategorie</td>
+                  <td><span class="val-categorie"><%- prod.categorie%></span></td>
+                </tr>
+                <tr class="rand-tabel">
+                  <th scope="row"></th>
+                  <td>Ingrediente</td>
+                  <td><span class="val-ingrediente"><%- prod.ingrediente%></span></td>
+                </tr>
+                <tr class="rand-tabel">
+                  <th scope="row"></th>
+                  <td>Tip livrare</td>
+                  <td><span class="val-livrare"><%- prod.tip_livrare.slice(1, prod.tip_livrare.length - 1)%></span></td>
+                </tr>
+                <tr class="rand-tabel">
+                  <th scope="row"></th>
+                  <td>Redus</td>
+                  <td><span class="val-reducere"><%- prod.reducere%></span></td>
+                </tr>
+                <tr class="rand-tabel">
+                  <th scope="row"></th>
+                  <td>Data adaugarii</td>
+                  <td><span class="val-data"><%- prod.data_adaugare.toLocaleDateString("ro-RO", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })%></span></td>
+                </tr>
+                <tr class="rand-tabel">
+                  <th scope="row"></th>
+                  <td>Produs pe stoc</td>
+                  <td><span class="val-stoc"><%- prod.pe_stoc%></span></td>
+                </tr>
+              </table>
+              <p>Descriere: <span class="val-descriere"><%- prod.descriere%></span></p>
+              <p>Tip produs: <span class="val-tip_produs"><%- prod.tip_produs%></span></p>
+            </div>
+            <figure style="width:30%">
+              <a href="/produs/<%-prod.id %>"><img src="/resources/imagini/galerie/<%- prod.cale_imagine %>" style="width:100%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
+            </figure>
+            <label class="selecteaza-cos">
+              Selectează:<br />
+              <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
+            </label>
           </div>
-          <p class="categorie">Categorie:<span class="val-categorie"><%- prod.categorie%></span></p>
-          <figure>
-            <a href="/produs/<%-prod.id %>"><img src="/resources/imagini/galerie/<%- prod.cale_imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
-          </figure>
-          <label class="selecteaza-cos">
-            Selectează:<br />
-            <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
-          </label>
+
         </article>
         <% }%>
       </div>

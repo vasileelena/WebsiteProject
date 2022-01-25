@@ -17,9 +17,10 @@
       <li><div>Produse</div>
         <ul class="noprint">
           <li><a href="/produse"><span id="arrow" class="fas fa-solid fa-arrow-right"></span> Toate</a></li>
-          <li><a href="/produse?tip=aliment"><span id="arrow" class="fas fa-solid fa-arrow-right"></span> Alimente</a></li>
-          <li><a href="/produse?tip=ingrijire"><span id="arrow" class="fas fa-solid fa-arrow-right"></span> Ingrijire</a></li>
-          <li><a href="/produse?tip=carti"><span id="arrow" class="fas fa-solid fa-arrow-right"></span> Carti</a></li>
+          <% for (let categ of locals.categorii){
+            %>
+          <li><a href="/produse?tip=<%-categ.tip_produs%>"><span id="arrow" class="fas fa-solid fa-arrow-right"></span> <%-categ.tip_produs.charAt(0).toUpperCase() + categ.tip_produs.slice(1)%></a></li>
+          <% } %>
         </ul>
       </li>
       <li><div>Cont</div>
